@@ -1,23 +1,24 @@
-import React from 'react';
-import { View, Platform } from 'react-native';
+import React from 'react'
+import { View, Platform } from 'react-native'
+import { PropTypes } from 'prop-types'
 
 export default class ElevatedView extends React.Component {
   static propTypes = {
-    elevation: React.PropTypes.number,
-  };
+    elevation: PropTypes.number,
+  }
   static defaultProps = {
     elevation: 0
-  };
+  }
 
   render() {
-    const { elevation, style, ...otherProps } = this.props;
+    const { elevation, style, ...otherProps } = this.props
 
     if (Platform.OS === 'android') {
       return (
         <View elevation={elevation} style={style} {...otherProps}>
           {this.props.children}
         </View>
-      );
+      )
     }
 
     if (elevation === 0) {
@@ -35,12 +36,12 @@ export default class ElevatedView extends React.Component {
       shadowOffset: {
         height: 0.6 * elevation,
       },
-    };
+    }
 
     return (
       <View style={[iosShadowElevation, style]} {...otherProps}>
         {this.props.children}
       </View>
-    );
+    )
   }
 }
